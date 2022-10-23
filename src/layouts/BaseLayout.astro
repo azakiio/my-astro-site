@@ -1,0 +1,21 @@
+---
+const { content } = Astro.props;
+console.log(Astro.props.content.astro.headings);
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <!-- Add other Head elements here, like styles and meta tags. -->
+    <title>{content.title}</title>
+  </head>
+  <body class="flex flex-col items-center">
+    <!-- Add other UI components here, like common headers and footers. -->
+    <h2>{content.title} by {content.author}</h2>
+    <!-- 2. Rendered HTML will be passed into the default slot. -->
+    <slot />
+    <p>Written on: {content.date}</p>
+  </body>
+</html>
