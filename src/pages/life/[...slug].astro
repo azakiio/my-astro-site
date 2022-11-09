@@ -1,35 +1,27 @@
 ---
+import Leaf from "components/Leaf.astro";
+import Life from "components/Life.astro";
 import Layout from "layouts/Layout.astro";
+import { get } from "lodash-es";
+const life = {
+  health: {
+    nutrition: { groceries: Leaf, recipes: {} },
+    sleep: {},
+    exercise: {},
+    skincare: {},
+  },
+  fun: { chess: {}, guitar: { default: {} } },
+  wealth: { budget: {}, spending: {} },
+  connection: { social: {}, family: {}, intimate: {} },
+  home: { clothes: {} },
+  growth: {},
+  income: {},
+};
 
-export async function getStaticPaths() {
-  const pages = [
-    {
-      slug: undefined,
-      title: "Astro Store",
-      text: "Welcome to the Astro store!",
-    },
-    {
-      slug: "products",
-      title: "Astro products",
-      text: "We have lots of products for you",
-    },
-    {
-      slug: "products/astro-handbook",
-      title: "The ultimative Astro handbook",
-      text: "If you want to learn Astro, you must read this book.",
-    },
-  ];
-  return pages.map(({ slug, title, text }) => {
-    return {
-      params: { slug },
-      props: { title, text },
-    };
-  });
-}
-
-const { title, text } = Astro.props;
+const slug = Astro.params.slug as string;
+const data = get(life, slug?.split("/"), life);
 ---
 
 <Layout title="Life">
-  <div>Life Test</div>
+  <Life Data={data} />
 </Layout>

@@ -1,21 +1,26 @@
 import { motion } from "framer-motion";
-export default function Nav() {
+export default function Navbar() {
   const variants = {
     initial: { y: 200, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { type: "spring" } },
   };
 
-  const links = ["Home", "life", "Set"];
+  const links = ["home", "life", "set"];
 
   return (
     <motion.div
-      className="w-fit p-4 flex gap-4"
+      className="w-fit p-4 flex gap-4 mx-auto"
       initial="initial"
       animate="visible"
       transition={{ staggerChildren: 0.1 }}
     >
       {links.map((link) => (
-        <motion.a className="flex" href={`/${link}`} variants={variants}>
+        <motion.a
+          className="flex btn-ghost p-2 rounded-full"
+          href={`/${link}`}
+          variants={variants}
+          key={link}
+        >
           {link}
         </motion.a>
       ))}

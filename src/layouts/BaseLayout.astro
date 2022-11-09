@@ -1,9 +1,9 @@
 ---
 const { content } = Astro.props;
-console.log(Astro.props.content.astro.headings);
+console.log(Astro.props);
 ---
 
-<html>
+<html data-theme='light'>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -11,7 +11,7 @@ console.log(Astro.props.content.astro.headings);
     <!-- Add other Head elements here, like styles and meta tags. -->
     <title>{content.title}</title>
   </head>
-  <body class="flex flex-col items-center">
+  <body class="flex flex-col">
     <!-- Add other UI components here, like common headers and footers. -->
     <h2>{content.title} by {content.author}</h2>
     <!-- 2. Rendered HTML will be passed into the default slot. -->
