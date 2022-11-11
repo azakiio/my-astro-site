@@ -1,0 +1,120 @@
+---
+import Layout from "layouts/Layout.astro";
+import { xor } from "lodash-es";
+
+const items = ["1", "2", "3", "4", "5", "6", "7", "8"];
+
+const two = [
+  [1, 3],
+  [5, 3],
+];
+const three = [
+  [1, 3],
+  [5, 5],
+  [5, 1],
+];
+const four = [
+  [1, 3],
+  [3, 5],
+  [5, 3],
+  [3, 1],
+];
+const five = [
+  [1, 3],
+  [3, 5],
+  [5, 4],
+  [5, 2],
+  [3, 1],
+];
+const six = [
+  [1, 3],
+  [2, 5],
+  [4, 5],
+  [5, 3],
+  [4, 1],
+  [2, 1],
+];
+const seven = [
+  [1, 3],
+  [2, 4],
+  [4, 5],
+  [5, 4],
+  [5, 2],
+  [4, 1],
+  [2, 2],
+];
+const eight = [
+  [1, 4],
+  [2, 6],
+  [4, 7],
+  [6, 6],
+  [7, 4],
+  [6, 2],
+  [4, 1],
+  [2, 2],
+];
+const eight5 = [
+  [1, 3],
+  [2, 4],
+  [3, 5],
+  [4, 4],
+  [5, 3],
+  [4, 2],
+  [3, 1],
+  [2, 2],
+];
+---
+
+<Layout title="Test">
+  <div
+    class="grid grid-cols-5 grid-rows-5 max-w-md aspect-square mx-auto border-4">
+    {
+      five.map(([x, y]) => (
+        <div
+          class="border-4 rounded-full flex items-center justify-center"
+          style={{ gridArea: `${x} / ${y}` }}>
+          {`${x}, ${y}`}
+        </div>
+      ))
+    }
+    <div
+      class="border-4 rounded-full flex items-center justify-center"
+      style={{ gridArea: `${3} / ${3}` }}>
+      Home
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-7 grid-rows-[repeat(7,minmax(0,1fr))] max-w-md aspect-square mx-auto border-4">
+    {
+      five.map(([x, y]) => (
+        <div
+          class="border-4 rounded-full flex items-center justify-center"
+          style={{ gridArea: `${x} / ${y}` }}>
+          {`${x}, ${y}`}
+        </div>
+      ))
+    }
+    <div
+      class="border-4 rounded-full flex items-center justify-center"
+      style={{ gridArea: `${4} / ${4}` }}>
+      Home
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-5 grid-rows-5 max-w-md aspect-square mx-auto border-4">
+    {
+      seven.map(([x, y]) => (
+        <div
+          class="border-4 rounded-full flex items-center justify-center"
+          style={{ gridArea: `${x} / ${y}` }}>
+          {`${x}, ${y}`}
+        </div>
+      ))
+    }
+    <div
+      class="border-4 rounded-full flex items-center justify-center"
+      style={{ gridArea: `${3} / ${3}` }}>
+      Home
+    </div>
+  </div>
+</Layout>
