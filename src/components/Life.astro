@@ -1,33 +1,33 @@
 ---
+import { life } from "layouts/LifeTemplate.astro";
+import { random } from "lodash-es";
+
 interface Props {
-  Data: Object | Function;
+  data: Partial<typeof life>;
 }
-const { Data } = Astro.props;
-const path = Astro.url.pathname;
-const test = Object.keys(Data);
-const total = test.length;
-console.log(test);
+const { data } = Astro.props;
+const path = Astro.url.pathname; // move to props
+
+const keys = Object.keys(data);
+const { length } = keys;
 ---
 
-{
-  typeof Data === "function" ? (
-    <Data />
-  ) : (
-    <div class="flex flex-col items-center">
-      <a href={path.slice(0, path.lastIndexOf("/"))}>
-        {path.slice(0, path.lastIndexOf("/"))}
-      </a>
-      <div class="flex flex-wrap justify-center items-center gap-4 max-w-md w-[100vmin] aspect-square p-4">
-        {Object.keys(Data).map((key, i) => (
-          <a
-            href={`${path}/${key}`}
-            class="p-4 rounded-2xl flex items-center justify-center uppercase font-bold flex-1 flex-shrink-0"
-            style={{ backgroundColor: `hsl(${(i / total) * 360} 100% 75%)` }}
-          >
-            {key}
-          </a>
-        ))}
-      </div>
-    </div>
-  )
-}
+<div class="flex flex-col items-center">
+  <div
+    class="grid grid-cols-5 grid-rows-5 justify-center justify-items-center items-center gap-4 max-w-lg w-[100vmin] aspect-square p-4"
+  >
+    {
+      keys.map((key, i) => (
+        <a
+          href={`${path}/${key}`}
+          class="p-4 rounded-2xl flex items-center justify-center uppercase font-bold flex-1 flex-shrink-0 border-2 col-sta"
+          style={{
+            borderColor: `hsl(${(i / length) * 360} 100% 75%)`,
+          }}
+        >
+          {key}
+        </a>
+      ))
+    }
+  </div>
+</div>

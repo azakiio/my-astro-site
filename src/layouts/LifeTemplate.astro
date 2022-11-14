@@ -1,21 +1,40 @@
 ---
+import Life from "components/Life.astro";
 import Navbar from "components/Navbar";
+import { get } from "lodash-es";
 
 export interface Props {
   title?: string;
+  content?: any;
 }
 
-const { title } = Astro.props as Props;
+const { title, content } = Astro.props as Props;
+console.log(Astro.props);
+export const life = {
+  health: {
+    nutrition: { groceries: {}, recipes: {} },
+    sleep: {},
+    exercise: {},
+    skincare: {},
+  },
+  fun: { chess: {}, guitar: {}, climbing: {} },
+  wealth: { budget: {}, spending: {} },
+  connection: { social: {}, family: {}, intimate: {} },
+  home: { clothes: {} },
+  growth: { quotes: {}, studying: {} },
+  income: {},
+};
+
 const pathArray = Astro.url.pathname.split("/");
+// [ '', 'life', 'fun' ]
 
-const breadCrumbs =
-  Astro.url.pathname === "/"
-    ? undefined
-    : pathArray.map((path, i, arr) => {
-        const url = `/${arr.slice(1, i + 1).join("/")}`;
+const data = get(life, pathArray.slice(2), life);
+const breadCrumbs = pathArray.map((path, i, arr) => {
+  const url = `/${arr.slice(1, i + 1).join("/")}`;
 
-        return { path: `/${path}`, url };
-      });
+  return { path: `/${path}`, url };
+});
+console.log(pathArray);
 ---
 
 <!DOCTYPE html>
@@ -28,8 +47,21 @@ const breadCrumbs =
   </head>
 
   <body>
-    <Navbar breadCrumbs={breadCrumbs} />
-    <slot />
+    <Navbar breadCrumbs={breadCrumbs} client:idle />
+    {Object.keys(data).length > 0 && <Life data={data} />}
+    {
+      content ? (
+        <article class="prose mx-auto">
+          <h2>
+            {content.title} by {content.author}
+          </h2>
+          <slot />
+          <p>Written on: {content.date}</p>
+        </article>
+      ) : (
+        <slot />
+      )
+    }
     <style>
       :root {
         --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
