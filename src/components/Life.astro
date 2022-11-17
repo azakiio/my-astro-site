@@ -1,6 +1,5 @@
 ---
 import { life } from "layouts/LifeTemplate.astro";
-import { random } from "lodash-es";
 
 interface Props {
   data: Partial<typeof life>;
@@ -10,24 +9,114 @@ const path = Astro.url.pathname; // move to props
 
 const keys = Object.keys(data);
 const { length } = keys;
+
+const options = {
+  2: {
+    grid: 3,
+    pos: [
+      { row: 1, col: 2 },
+      { row: 3, col: 2 },
+    ],
+  },
+  3: {
+    grid: 3,
+    pos: [
+      { row: 1, col: 2 },
+      { row: 3, col: 3 },
+      { row: 3, col: 1 },
+    ],
+  },
+  4: {
+    grid: 3,
+    pos: [
+      { row: 1, col: 2 },
+      { row: 2, col: 3 },
+      { row: 3, col: 2 },
+      { row: 2, col: 1 },
+    ],
+  },
+  5: {
+    grid: 5,
+    pos: [
+      { row: 1, col: 3 },
+      { row: 3, col: 5 },
+      { row: 5, col: 4 },
+      { row: 5, col: 2 },
+      { row: 3, col: 1 },
+    ],
+  },
+  6: {
+    grid: 5,
+    pos: [
+      { row: 1, col: 3 },
+      { row: 2, col: 5 },
+      { row: 4, col: 5 },
+      { row: 5, col: 3 },
+      { row: 4, col: 1 },
+      { row: 2, col: 1 },
+    ],
+  },
+  7: {
+    grid: 7,
+    pos: [
+      { row: 1, col: 4 },
+      { row: 3, col: 6 },
+      { row: 5, col: 7 },
+      { row: 7, col: 5 },
+      { row: 7, col: 3 },
+      { row: 5, col: 1 },
+      { row: 3, col: 2 },
+    ],
+  },
+  8: {
+    grid: 7,
+    pos: [
+      { row: 1, col: 4 },
+      { row: 2, col: 6 },
+      { row: 4, col: 7 },
+      { row: 6, col: 6 },
+      { row: 7, col: 4 },
+      { row: 6, col: 2 },
+      { row: 4, col: 1 },
+      { row: 2, col: 2 },
+    ],
+  },
+};
+
+const { grid, pos } = options[length];
 ---
 
 <div class="flex flex-col items-center">
   <div
-    class="grid grid-cols-5 grid-rows-5 justify-center justify-items-center items-center gap-4 max-w-lg w-[100vmin] aspect-square p-4"
+    class="grid justify-center justify-items-center items-center max-w-lg w-[100vmin] aspect-square p-4"
+    style={{
+      gridTemplateColumns: `repeat(${grid}, minmax(0, 1fr))`,
+      gridTemplateRows: `repeat(${grid}, minmax(0, 1fr))`,
+    }}
   >
     {
-      keys.map((key, i) => (
+      pos.map(({ row, col }, i) => (
         <a
-          href={`${path}/${key}`}
-          class="p-4 rounded-2xl flex items-center justify-center uppercase font-bold flex-1 flex-shrink-0 border-2 col-sta"
+          href={`${path}/${keys[i]}`}
+          class="p-4 rounded-2xl flex items-center justify-center uppercase font-bold flex-1 flex-shrink-0 border-2"
           style={{
             borderColor: `hsl(${(i / length) * 360} 100% 75%)`,
+            gridArea: `${row}/${col}`,
           }}
         >
-          {key}
+          {keys[i]}
         </a>
       ))
     }
+    <a
+      href={`${path}`}
+      class="p-4 rounded-2xl flex items-center justify-center uppercase font-bold flex-1 flex-shrink-0 border-2"
+      style={{
+        borderColor: `hsl(0 100% 75%)`,
+        gridArea: `${Math.ceil(grid / 2)}/${Math.ceil(grid / 2)}`,
+      }}
+    >
+      {path}
+    </a>
   </div>
 </div>

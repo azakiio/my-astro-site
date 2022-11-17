@@ -9,8 +9,6 @@ const variants = {
 const keys = ["Backquote", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5"];
 
 export default function Navbar({ breadCrumbs }: Props) {
-  const [isNav, setIsNav] = useState(localStorage.getItem("keyNav"));
-
   useEffect(() => {
     const keyNav = (e) => {
       const index = keys.slice(0, breadCrumbs.length - 1).indexOf(e.code);
@@ -18,15 +16,9 @@ export default function Navbar({ breadCrumbs }: Props) {
         location.assign(breadCrumbs[index].url);
       }
     };
-
-    if (isNav === "true") {
-      document.addEventListener("keypress", keyNav);
-    } else {
-      document.removeEventListener("keypress", keyNav);
-    }
-
+    document.addEventListener("keypress", keyNav);
     return () => document.removeEventListener("keypress", keyNav);
-  }, [isNav]);
+  }, []);
 
   return (
     <motion.div
@@ -48,8 +40,6 @@ export default function Navbar({ breadCrumbs }: Props) {
           {i ? path : "~"}
         </motion.a>
       ))}
-      <button onClick={() => setIsNav("true")}>Turn On</button>
-      <button onClick={() => setIsNav("false")}>Turn Off</button>
     </motion.div>
   );
 }
