@@ -1,7 +1,7 @@
 ---
-import Life from "components/Life.astro";
+import Life from "components/Life";
 import Navbar from "components/Navbar";
-import { get } from "lodash-es";
+import { capitalize, get } from "lodash-es";
 
 export interface Props {
   title?: string;
@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const { title, content } = Astro.props as Props;
-console.log(Astro.props);
+
 export const life = {
   health: {
     nutrition: { groceries: {}, recipes: {} },
@@ -17,12 +17,11 @@ export const life = {
     exercise: {},
     skincare: {},
   },
-  fun: { chess: {}, guitar: {}, climbing: {} },
   wealth: { budget: {}, spending: {} },
+  fun: { chess: {}, guitar: {}, climbing: {} },
   connection: { social: {}, family: {}, intimate: {} },
   home: { clothes: {} },
   growth: { quotes: {}, studying: {} },
-  income: {},
 };
 
 const pathArray = Astro.url.pathname.split("/");
@@ -32,9 +31,8 @@ const data = get(life, pathArray.slice(2), life);
 const breadCrumbs = pathArray.map((path, i, arr) => {
   const url = `/${arr.slice(1, i + 1).join("/")}`;
 
-  return { path: `/${path}`, url };
+  return { path: capitalize(path), url };
 });
-console.log(pathArray);
 ---
 
 <!DOCTYPE html>
@@ -43,12 +41,12 @@ console.log(pathArray);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <title>akiiza | {title}</title>
+    <title>akiiza | {breadCrumbs.at(-1).path}</title>
   </head>
 
   <body>
     <Navbar breadCrumbs={breadCrumbs} client:idle />
-    {Object.keys(data).length > 0 && <Life data={data} />}
+    <Life data={data} breadCrumbs={breadCrumbs.slice(1)} client:idle />
     {
       content ? (
         <article class="prose mx-auto">

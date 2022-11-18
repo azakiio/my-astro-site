@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const variants = {
   initial: { y: 200, opacity: 0 },
@@ -31,7 +31,7 @@ export default function Navbar({ breadCrumbs }: Props) {
         <motion.a
           className={`flex btn-ghost p-2 rounded-full ${
             i === breadCrumbs?.length - 1 &&
-            "underline underline-offset-8 decoration-2"
+            "underline underline-offset-8 decoration-2 pointer-events-none"
           }`}
           href={url}
           variants={variants}

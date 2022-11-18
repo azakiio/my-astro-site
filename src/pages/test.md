@@ -1,5 +1,5 @@
 ---
-layout: layouts/BaseLayout.astro
+layout: layouts/LifeTemplate.astro
 title: "Astro v1 Launch!"
 author: "Matthew Phillips"
 date: "09 Aug 2022"
