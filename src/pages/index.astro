@@ -1,5 +1,15 @@
 ---
+import ThemeSelector from "components/themeSelector";
 import Layout from "layouts/Layout.astro";
+type Prefs = { theme: string };
+if (!Astro.cookies.has("prefs")) {
+  Astro.cookies.set("prefs", { theme: "light" }, { maxAge: 604800 });
+}
+
+const prefs: Prefs = Astro.cookies.get("prefs").json();
 ---
 
-<Layout title="Home"><a href="/life">Life</a></Layout>
+<Layout title="Home" theme={prefs.theme}>
+  <ThemeSelector />
+  <a href="/life">Life</a>
+</Layout>

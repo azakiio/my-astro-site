@@ -3,9 +3,10 @@ import Navbar from "components/Navbar";
 
 export interface Props {
   title?: string;
+  theme?: string;
 }
 
-const { title } = Astro.props as Props;
+const { title, theme } = Astro.props as Props;
 const pathArray = Astro.url.pathname.split("/");
 
 const breadCrumbs =
@@ -19,7 +20,7 @@ const breadCrumbs =
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme={theme}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />

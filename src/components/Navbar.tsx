@@ -21,25 +21,20 @@ export default function Navbar({ breadCrumbs }: Props) {
   }, []);
 
   return (
-    <motion.div
-      className="w-fit p-4 flex gap-2 mx-auto"
-      initial="initial"
-      animate="visible"
-      transition={{ staggerChildren: 0.1 }}
-    >
-      {breadCrumbs?.map(({ path, url }, i) => (
-        <motion.a
-          className={`flex btn-ghost p-2 rounded-full ${
-            i === breadCrumbs?.length - 1 &&
-            "underline underline-offset-8 decoration-2 pointer-events-none"
-          }`}
-          href={url}
-          variants={variants}
-          key={url}
-        >
-          {i ? path : "~"}
-        </motion.a>
-      ))}
+    <motion.div className="w-fit p-4 flex gap-2 mx-auto breadcrumbs overflow-clip">
+      <motion.ul
+        initial="initial"
+        animate="visible"
+        transition={{ staggerChildren: 0.1 }}
+      >
+        {breadCrumbs?.map(({ path, url }, i) => (
+          <motion.li variants={variants} key={url}>
+            <a href={url} className="link link-hover p-2">
+              {i ? path : "~"}
+            </a>
+          </motion.li>
+        ))}
+      </motion.ul>
     </motion.div>
   );
 }

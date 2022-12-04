@@ -1,12 +1,49 @@
 ---
 layout: layouts/LifeTemplate.astro
-title: "Exercise"
+title: "Nutrition"
 author: "Zaki"
 date: "09 Nov 2022"
 ---
+# Groceries
 
-Used to tell her everything I was feeling. But then I guess I stopped, 'cause I wanted her to love who she thought I was, not who I felt myself becoming. Ever think about how horrified the people we love would be if they found out who we truly are? So we just dig ourselves deeper into our lies every day. Ultimately hurting the only people brave enough to love us. Wish I didn't do that. Wish I was brave enough to love them back. I don't know. Maybe you should try it. We don't have as much time as we think.
+cooking
+Veggies:
+Spinach/Kale
+Broccoli/Cauliflower
+Zucchini
 
-## Sources
+Proteins:
+Chicken breast
+Grass feed beef
+Organic Eggs
+Fish (tuna, salmon)
 
-- [Intro to Strength Training](https://www.youtube.com/watch?v=TJGxDUoEq6I)
+Good fruits:
+berries (raspberry, black and blue)
+🥑
+🥝
+🍌
+🍊
+
+Dairy:
+Greek yogurt
+Cottage cheese
+Feta
+Sour cream
+Butter
+
+Nuts/seeds:
+peanut butter/almond butter
+Almonds
+Pine nuts
+Chia seeds
+Flax seeds
+
+Flavourings:
+Salt, pepper
+Mayonnaise
+Dijon mustard
+
+Misc:
+Baking powder
+Olive oil, coconut oil, sesame oil
